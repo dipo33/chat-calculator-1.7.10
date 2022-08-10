@@ -1,4 +1,4 @@
-package com.myname.mymodid;
+package io.github.dipo33.chatcalc;
 
 import cpw.mods.fml.common.event.*;
 
