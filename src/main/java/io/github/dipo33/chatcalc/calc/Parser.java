@@ -54,6 +54,11 @@ public class Parser {
                     case ')':
                         elements.add(new FormulaBracket(false));
                         break;
+                    case 'x':
+                        if (ShuntingYard.lastResult == null)
+                            throw new RuntimeException("You can't use 'x' before you do any computation");
+                        elements.add(new FormulaNumber(ShuntingYard.lastResult));
+                        break;
                     default:
                         throw new RuntimeException("Illegal character found in formula: " + c);
                 }

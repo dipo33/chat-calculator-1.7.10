@@ -11,6 +11,8 @@ import java.util.Stack;
 
 public class ShuntingYard {
 
+    public static RationalNumber lastResult = null;
+
     public static Queue<IFormulaElement> shuntingYard(List<IFormulaElement> elements) {
         Queue<IFormulaElement> outputQueue = new LinkedList<>();
         Stack<IFormulaElement> operatorStack = new Stack<>();
@@ -77,7 +79,7 @@ public class ShuntingYard {
             }
         }
 
-        assert stack.size() == 1;
-        return stack.pop();
+        lastResult = stack.pop();
+        return lastResult;
     }
 }
