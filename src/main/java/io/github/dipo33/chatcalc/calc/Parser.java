@@ -12,6 +12,8 @@ public class Parser {
 
     public static List<IFormulaElement> parse(String formulaString) {
         formulaString = formulaString.replaceAll("\\s+", "");
+        if (formulaString.isEmpty())
+            throw new RuntimeException("No formula found");
 
 
         List<IFormulaElement> elements = new ArrayList<>();
@@ -49,7 +51,7 @@ public class Parser {
                         elements.add(new FormulaBracket(false));
                         break;
                     default:
-                        throw new RuntimeException("Illegal character found in formula: " + c); //TODO: Implement this better
+                        throw new RuntimeException("Illegal character found in formula: " + c);
                 }
             }
 

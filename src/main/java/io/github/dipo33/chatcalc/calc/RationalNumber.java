@@ -58,6 +58,9 @@ public class RationalNumber {
         if (!other.isInteger()) throw new ArithmeticException("Exponent can't be a decimal number");
 
         int pow = other.asInteger().intValueExact();
+        if (pow > 512)
+            throw new ArithmeticException("Exponent can't be higher than 512");
+
         return new RationalNumber(numerator.pow(pow), denominator.pow(pow));
     }
 

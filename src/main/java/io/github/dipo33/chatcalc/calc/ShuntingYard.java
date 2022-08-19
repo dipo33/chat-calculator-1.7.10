@@ -38,16 +38,20 @@ public class ShuntingYard {
                     operatorStack.add(token);
                     break;
                 case RIGHT_BRACKET:
-                    // TODO: check if there is bracket
-                    while (operatorStack.lastElement().getType() != IFormulaElement.Type.LEFT_BRACKET) {
+                    while (!operatorStack.isEmpty() && operatorStack.lastElement().getType() != IFormulaElement.Type.LEFT_BRACKET) {
                         outputQueue.add(operatorStack.pop());
                     }
+                    if (operatorStack.isEmpty())
+                        throw new RuntimeException("Missing a left bracket");
                     operatorStack.pop();
             }
         }
 
         while (!operatorStack.empty()) {
-            outputQueue.add(operatorStack.pop());
+            IFormulaElement element = operatorStack.pop();
+            if (element.getType() == IFormulaElement.Type.LEFT_BRACKET)
+                throw new RuntimeException("Missing a right bracket");
+            outputQueue.add(element);
         }
 
         return outputQueue;
@@ -65,7 +69,7 @@ public class ShuntingYard {
                 RationalNumber b = stack.pop();
                 stack.push(op.evaluate(b, a));
             } else {
-                // TODO: SHOULD NOT HAPPEN
+                throw new RuntimeException("Unknown error, should not happen");
             }
         }
 
