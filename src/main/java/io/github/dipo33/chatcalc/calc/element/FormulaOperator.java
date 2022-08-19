@@ -46,6 +46,8 @@ public class FormulaOperator implements IFormulaElement {
                 return 7;
             case POWER:
                 return 8;
+            case NEGATION:
+                return 10;
             default:
                 throw new EnumConstantNotPresentException(OperatorType.class, getValue().name());
         }
@@ -57,6 +59,7 @@ public class FormulaOperator implements IFormulaElement {
             case SUBTRACTION:
             case MULTIPLICATION:
             case DIVISION:
+            case NEGATION:
                 return true;
             case POWER:
                 return false;
@@ -70,6 +73,7 @@ public class FormulaOperator implements IFormulaElement {
         SUBTRACTION,
         MULTIPLICATION,
         DIVISION,
-        POWER
+        POWER,
+        NEGATION
     }
 }

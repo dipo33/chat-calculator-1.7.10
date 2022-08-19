@@ -33,7 +33,11 @@ public class Parser {
                         elements.add(new FormulaOperator(FormulaOperator.OperatorType.ADDITION));
                         break;
                     case '-':
-                        elements.add(new FormulaOperator(FormulaOperator.OperatorType.SUBTRACTION));
+                        if (i == 0 || formulaString.charAt(i - 1) == '(') {
+                            elements.add(new FormulaOperator(FormulaOperator.OperatorType.NEGATION));
+                        } else {
+                            elements.add(new FormulaOperator(FormulaOperator.OperatorType.SUBTRACTION));
+                        }
                         break;
                     case '*':
                         elements.add(new FormulaOperator(FormulaOperator.OperatorType.MULTIPLICATION));

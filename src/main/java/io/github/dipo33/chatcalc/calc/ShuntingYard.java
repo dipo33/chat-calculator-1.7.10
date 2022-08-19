@@ -66,8 +66,12 @@ public class ShuntingYard {
             } else if (token.getType() == IFormulaElement.Type.OPERATOR) {
                 FormulaOperator op = (FormulaOperator) token;
                 RationalNumber a = stack.pop();
-                RationalNumber b = stack.pop();
-                stack.push(op.evaluate(b, a));
+                if (((FormulaOperator) token).getValue() == FormulaOperator.OperatorType.NEGATION) {
+                    stack.push(a.multiply(new RationalNumber(-1)));
+                } else {
+                    RationalNumber b = stack.pop();
+                    stack.push(op.evaluate(b, a));
+                }
             } else {
                 throw new RuntimeException("Unknown error, should not happen");
             }
