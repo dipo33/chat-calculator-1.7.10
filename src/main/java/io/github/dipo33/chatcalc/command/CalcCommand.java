@@ -8,6 +8,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 
+import java.math.BigInteger;
 import java.util.EmptyStackException;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class CalcCommand extends CommandBase {
                 sender.addChatMessage(new ChatComponentText("§lFraction: §f" + result.asFractionString()));
             sender.addChatMessage(new ChatComponentText("§lDecimal: §f" + result.asDecimalString(50)));
 
-            if (result.isInteger()) {
+            if (result.isInteger() && result.asInteger().compareTo(BigInteger.ZERO) > 0) {
                 sender.addChatMessage(new ChatComponentText("§lStacks: §f" + result.asStackString()));
                 sender.addChatMessage(new ChatComponentText("§lFluid: §f" + result.asFluidString()));
             }
