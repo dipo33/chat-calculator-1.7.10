@@ -3,6 +3,7 @@ package io.github.dipo33.chatcalc;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import io.github.dipo33.chatcalc.command.CalcCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,6 +43,7 @@ public class MyMod {
     // register server commands in this event handler
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
+        event.registerServerCommand(new CalcCommand());
     }
 
     @Mod.EventHandler
