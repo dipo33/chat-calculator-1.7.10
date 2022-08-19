@@ -1,6 +1,8 @@
 package io.github.dipo33.chatcalc.calc;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class RationalNumber {
@@ -96,6 +98,52 @@ public class RationalNumber {
     @Override
     public String toString() {
         return numerator + "/" + denominator;
+    }
+
+    public String asFractionString() {
+        return toString();
+    }
+
+    public String asDecimalString(int maxDecimalPlaces) {
+        BigDecimal decimalNumerator = new BigDecimal(numerator.toString());
+        BigDecimal decimalDenominator = new BigDecimal(denominator.toString());
+
+        String res = decimalNumerator.divide(decimalDenominator, maxDecimalPlaces, RoundingMode.DOWN).toPlainString();
+        res = res.contains(".") ? res.replaceAll("0*$","").replaceAll("\\.$","") : res;
+        if (res.contains(".")) {
+            String intPart = res.substring(0, res.indexOf("."));
+            res = addDelimitingCommas(intPart) + res.substring(res.indexOf("."));
+        } else {
+            res = addDelimitingCommas(res);
+        }
+
+        return res;
+    }
+
+    private String addDelimitingCommas(String str) {
+        StringBuilder delimited = new StringBuilder();
+        for (int i = str.length() - 1; i >= 0; i -= 3) {
+            delimited.insert(0, ",");
+            delimited.insert(0, str.substring(Math.max(0, i - 2), i + 1));
+        }
+
+        return delimited.substring(0, delimited.length() - 1);
+    }
+
+    public String asStackString() {
+        BigInteger value = asInteger();
+        BigInteger stacks = value.divide(BigInteger.valueOf(64));
+        BigInteger leftover = value.mod(BigInteger.valueOf(64));
+
+        return addDelimitingCommas(stacks.toString()) + "x64 + " + leftover;
+    }
+
+    public String asFluidString() {
+        BigInteger value = asInteger();
+        BigInteger stacks = value.divide(BigInteger.valueOf(144));
+        BigInteger leftover = value.mod(BigInteger.valueOf(144));
+
+        return addDelimitingCommas(stacks.toString()) + "x144mB + " + leftover + "mB";
     }
 
     private static BigInteger lcm(BigInteger a, BigInteger b) {
