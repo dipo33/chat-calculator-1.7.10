@@ -146,6 +146,53 @@ public class RationalNumber {
         return addDelimitingCommas(stacks.toString()) + "x144mB + " + leftover + "mB";
     }
 
+    public String asTimeString() {
+        BigInteger value = asInteger();
+
+        BigInteger seconds = value.mod(BigInteger.valueOf(60));
+        value = value.divide(BigInteger.valueOf(60));
+
+        BigInteger minutes = value.mod(BigInteger.valueOf(60));
+        value = value.divide(BigInteger.valueOf(60));
+
+        BigInteger hours = value.mod(BigInteger.valueOf(24));
+        value = value.divide(BigInteger.valueOf(24));
+
+        BigInteger days = value.mod(BigInteger.valueOf(365));
+        BigInteger years = value.divide(BigInteger.valueOf(365));
+
+        StringBuilder result = new StringBuilder();
+        if (years.compareTo(BigInteger.ZERO) > 0)
+            result.append(years).append(" years, ");
+        if (days.compareTo(BigInteger.ZERO) > 0)
+            result.append(days).append(" days, ");
+        if (hours.compareTo(BigInteger.ZERO) > 0)
+            result.append(hours).append(" hours, ");
+        if (minutes.compareTo(BigInteger.ZERO) > 0)
+            result.append(minutes).append(" minutes, ");
+        if (seconds.compareTo(BigInteger.ZERO) > 0)
+            result.append(seconds).append(" seconds");
+
+        if (result.charAt(result.length() -1) == ' ')
+            return result.substring(0, result.length() - 2);
+
+        return result.toString();
+    }
+
+    public String asTickTimeString() {
+        BigInteger value = asInteger();
+
+        BigInteger ticks = value.mod(BigInteger.valueOf(20));
+        value = value.divide(BigInteger.valueOf(20));
+        String rest = new RationalNumber(value, BigInteger.ONE).asTimeString();
+
+        if (rest.isEmpty())
+            return ticks + " ticks";
+        if (ticks.equals(BigInteger.ZERO))
+            return rest;
+        return rest + ", " + ticks + " ticks";
+    }
+
     private static BigInteger lcm(BigInteger a, BigInteger b) {
         return a.abs().multiply(b.abs()).divide(gcd(a, b));
     }

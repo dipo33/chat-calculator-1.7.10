@@ -40,6 +40,10 @@ public class CalcCommand extends CommandBase {
             if (result.isInteger() && result.asInteger().compareTo(BigInteger.ZERO) > 0) {
                 sender.addChatMessage(new ChatComponentText("§lStacks: §f" + result.asStackString()));
                 sender.addChatMessage(new ChatComponentText("§lFluid: §f" + result.asFluidString()));
+                if (result.asInteger().compareTo(BigInteger.valueOf(630720000000L)) <= 0) {
+                    sender.addChatMessage(new ChatComponentText("§lTime: §f" + result.asTimeString()));
+                    sender.addChatMessage(new ChatComponentText("§lTick Time: §f" + result.asTickTimeString()));
+                }
             }
         } catch (EmptyStackException e) {
             sender.addChatMessage(new ChatComponentText("§c§lError: §fInvalid formula"));
