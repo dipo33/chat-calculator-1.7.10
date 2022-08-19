@@ -86,7 +86,7 @@ public class RationalNumber {
     }
 
     public boolean isInteger() {
-        return numerator.mod(denominator).equals(BigInteger.ZERO);
+        return denominator.equals(BigInteger.ONE);
     }
 
     public BigInteger asInteger() {
