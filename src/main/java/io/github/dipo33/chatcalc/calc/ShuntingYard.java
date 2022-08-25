@@ -17,7 +17,6 @@ public class ShuntingYard {
         Queue<IFormulaElement> outputQueue = new LinkedList<>();
         Stack<IFormulaElement> operatorStack = new Stack<>();
 
-
         for (IFormulaElement token : elements) {
             switch (token.getType()) {
                 case NUMBER:
