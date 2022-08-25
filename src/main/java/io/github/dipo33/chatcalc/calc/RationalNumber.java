@@ -184,10 +184,11 @@ public class RationalNumber {
 
         BigInteger ticks = value.mod(BigInteger.valueOf(20));
         value = value.divide(BigInteger.valueOf(20));
-        String rest = new RationalNumber(value, BigInteger.ONE).asTimeString();
 
-        if (rest.isEmpty())
+        if (value.equals(BigInteger.ZERO))
             return ticks + " ticks";
+
+        String rest = new RationalNumber(value, BigInteger.ONE).asTimeString();
         if (ticks.equals(BigInteger.ZERO))
             return rest;
         return rest + ", " + ticks + " ticks";
