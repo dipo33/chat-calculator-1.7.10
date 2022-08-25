@@ -16,7 +16,7 @@ public class CalcCommand extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return "c";
+        return "calc";
     }
 
     @Override
