@@ -29,20 +29,20 @@ public class CalcCommand extends CommandBase {
         try {
             String formula = String.join("", args);
             sender.addChatMessage(new ChatComponentText("§e§l---------------------------------------------"));
-            sender.addChatMessage(new ChatComponentText("§lFormula: §f" + formula));
+            sender.addChatMessage(new ChatComponentText("§b§lFormula: §f" + formula));
 
             List<IFormulaElement> elements = Parser.parse(formula);
             RationalNumber result = ShuntingYard.evaluatePrefix(ShuntingYard.shuntingYard(elements));
             if (!result.isInteger())
-                sender.addChatMessage(new ChatComponentText("§lFraction: §f" + result.asFractionString()));
-            sender.addChatMessage(new ChatComponentText("§lDecimal: §f" + result.asDecimalString(50)));
+                sender.addChatMessage(new ChatComponentText("§a§lFraction: §f" + result.asFractionString()));
+            sender.addChatMessage(new ChatComponentText("§a§lDecimal: §f" + result.asDecimalString(50)));
 
             if (result.isInteger() && result.asInteger().compareTo(BigInteger.ZERO) > 0) {
-                sender.addChatMessage(new ChatComponentText("§lStacks: §f" + result.asStackString()));
-                sender.addChatMessage(new ChatComponentText("§lFluid: §f" + result.asFluidString()));
+                sender.addChatMessage(new ChatComponentText("§a§lStacks: §f" + result.asStackString()));
+                sender.addChatMessage(new ChatComponentText("§a§lFluid: §f" + result.asFluidString()));
                 if (result.asInteger().compareTo(BigInteger.valueOf(630720000000L)) <= 0) {
-                    sender.addChatMessage(new ChatComponentText("§lTime: §f" + result.asTimeString()));
-                    sender.addChatMessage(new ChatComponentText("§lTick Time: §f" + result.asTickTimeString()));
+                    sender.addChatMessage(new ChatComponentText("§a§lTime: §f" + result.asTimeString()));
+                    sender.addChatMessage(new ChatComponentText("§a§lTick Time: §f" + result.asTickTimeString()));
                 }
             }
         } catch (EmptyStackException e) {
