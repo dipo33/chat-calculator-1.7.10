@@ -4,6 +4,7 @@ import com.dipo33.chatcalc.calc.element.FormulaNumber;
 import com.dipo33.chatcalc.calc.element.FormulaOperator;
 import com.dipo33.chatcalc.calc.element.IFormulaElement;
 
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -11,7 +12,7 @@ import java.util.Stack;
 
 public class ShuntingYard {
 
-    public static RationalNumber lastResult = null;
+    public static NumberValue lastResult = null;
 
     public static Queue<IFormulaElement> shuntingYard(List<IFormulaElement> elements) {
         Queue<IFormulaElement> outputQueue = new LinkedList<>();
@@ -60,19 +61,19 @@ public class ShuntingYard {
         return outputQueue;
     }
 
-    public static RationalNumber evaluatePrefix(Queue<IFormulaElement> queue) {
-        Stack<RationalNumber> stack = new Stack<>();
+    public static NumberValue evaluatePrefix(Queue<IFormulaElement> queue) {
+        Stack<NumberValue> stack = new Stack<>();
         while (!queue.isEmpty()) {
             IFormulaElement token = queue.remove();
             if (token.getType() == IFormulaElement.Type.NUMBER) {
                 stack.push(((FormulaNumber) token).getValue());
             } else if (token.getType() == IFormulaElement.Type.OPERATOR) {
                 FormulaOperator op = (FormulaOperator) token;
-                RationalNumber a = stack.pop();
+                NumberValue a = stack.pop();
                 if (((FormulaOperator) token).getValue() == FormulaOperator.OperatorType.NEGATION) {
                     stack.push(a.multiply(new RationalNumber(-1)));
                 } else {
-                    RationalNumber b = stack.pop();
+                    NumberValue b = stack.pop();
                     stack.push(op.evaluate(b, a));
                 }
             } else {
@@ -81,6 +82,10 @@ public class ShuntingYard {
         }
 
         lastResult = stack.pop();
+        if (lastResult.isInteger()) {
+            lastResult = new RationalNumber(lastResult.asInteger(), BigInteger.ONE);
+        }
+
         return lastResult;
     }
 }

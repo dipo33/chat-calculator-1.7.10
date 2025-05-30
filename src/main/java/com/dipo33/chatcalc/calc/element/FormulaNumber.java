@@ -1,14 +1,14 @@
 package com.dipo33.chatcalc.calc.element;
 
-import com.dipo33.chatcalc.calc.RationalNumber;
+import com.dipo33.chatcalc.calc.NumberValue;
 
 import java.util.Objects;
 
 public class FormulaNumber implements IFormulaElement {
 
-    private final RationalNumber number;
+    private final NumberValue number;
 
-    public FormulaNumber(RationalNumber number) {
+    public FormulaNumber(NumberValue number) {
         this.number = number;
     }
 
@@ -17,7 +17,7 @@ public class FormulaNumber implements IFormulaElement {
         return Type.NUMBER;
     }
 
-    public RationalNumber getValue() {
+    public NumberValue getValue() {
         return number;
     }
 

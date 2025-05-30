@@ -3,6 +3,7 @@ package com.dipo33.chatcalc;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.dipo33.chatcalc.calc.NumberValue;
 import com.dipo33.chatcalc.calc.RationalNumber;
 
 import java.lang.reflect.InvocationTargetException;
@@ -10,6 +11,7 @@ import java.lang.reflect.Method;
 import java.math.BigInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MathTests {
@@ -163,8 +165,11 @@ public class MathTests {
     @Test
     @DisplayName("Power to Positive Exponent")
     public void powerToPositiveExponent() {
-        RationalNumber number = new RationalNumber(2, 1).power(new RationalNumber(8, 1));
-        assertEquals(BigInteger.valueOf(256), number.getNumerator());
-        assertEquals(BigInteger.valueOf(1), number.getDenominator());
+        NumberValue number = new RationalNumber(2, 1).power(new RationalNumber(8, 1));
+        assertInstanceOf(RationalNumber.class, number, "Result should be rational number");
+
+        RationalNumber rational = (RationalNumber) number;
+        assertEquals(BigInteger.valueOf(256), rational.getNumerator());
+        assertEquals(BigInteger.valueOf(1), rational.getDenominator());
     }
 }

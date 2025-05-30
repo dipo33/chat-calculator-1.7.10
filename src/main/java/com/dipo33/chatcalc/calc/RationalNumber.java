@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class RationalNumber {
+public class RationalNumber implements NumberValue {
 
     private final BigInteger numerator;
     private final BigInteger denominator;
@@ -44,6 +44,15 @@ public class RationalNumber {
         return new RationalNumber(new_numerator, new_denominator);
     }
 
+    @Override
+    public NumberValue add(final NumberValue other) {
+        if (other instanceof final RationalNumber that) {
+            return this.add(that);
+        }
+
+        return this.asIrrational().add(other);
+    }
+
     public RationalNumber subtract(RationalNumber other) {
         BigInteger new_denominator = lcm(denominator, other.denominator);
         BigInteger new_numerator = new_denominator.divide(denominator).multiply(numerator).subtract(
@@ -53,17 +62,44 @@ public class RationalNumber {
         return new RationalNumber(new_numerator, new_denominator);
     }
 
+    @Override
+    public NumberValue subtract(final NumberValue other) {
+        if (other instanceof final RationalNumber that) {
+            return this.subtract(that);
+        }
+
+        return this.asIrrational().subtract(other);
+    }
+
     public RationalNumber multiply(RationalNumber other) {
         return new RationalNumber(numerator.multiply(other.numerator), denominator.multiply(other.denominator));
+    }
+
+    @Override
+    public NumberValue multiply(final NumberValue other) {
+        if (other instanceof final RationalNumber that) {
+            return this.multiply(that);
+        }
+
+        return this.asIrrational().multiply(other);
     }
 
     public RationalNumber divide(RationalNumber other) {
         return multiply(new RationalNumber(other.denominator, other.numerator));
     }
 
-    public RationalNumber power(RationalNumber other) {
+    @Override
+    public NumberValue divide(final NumberValue other) {
+        if (other instanceof final RationalNumber that) {
+            return this.divide(that);
+        }
+
+        return this.asIrrational().divide(other);
+    }
+
+    public NumberValue power(RationalNumber other) {
         if (!other.isInteger()) {
-            throw new ArithmeticException("Exponent can't be a decimal number");
+            return asIrrational().power(other);
         }
 
         int pow = other.asInteger().intValueExact();
@@ -72,6 +108,24 @@ public class RationalNumber {
         }
 
         return new RationalNumber(numerator.pow(pow), denominator.pow(pow));
+    }
+
+    @Override
+    public NumberValue power(final NumberValue other) {
+        if (other instanceof final RationalNumber that) {
+            return this.power(that);
+        }
+
+        return this.asIrrational().power(other);
+    }
+
+    @Override
+    public BigDecimal asBigDecimal() {
+        return new BigDecimal(numerator).divide(new BigDecimal(denominator), 100, RoundingMode.HALF_UP);
+    }
+
+    public IrrationalNumber asIrrational() {
+        return new IrrationalNumber(asBigDecimal());
     }
 
     @Override
@@ -99,10 +153,12 @@ public class RationalNumber {
         return denominator;
     }
 
+    @Override
     public boolean isInteger() {
         return denominator.equals(BigInteger.ONE);
     }
 
+    @Override
     public BigInteger asInteger() {
         return numerator.divide(denominator);
     }
@@ -112,10 +168,12 @@ public class RationalNumber {
         return numerator + "/" + denominator;
     }
 
+    @Override
     public String asFractionString() {
         return toString();
     }
 
+    @Override
     public String asDecimalString(int maxDecimalPlaces) {
         BigDecimal decimalNumerator = new BigDecimal(numerator.toString());
         BigDecimal decimalDenominator = new BigDecimal(denominator.toString());
@@ -142,6 +200,7 @@ public class RationalNumber {
         return delimited.substring(0, delimited.length() - 1);
     }
 
+    @Override
     public String asStackString() {
         BigInteger value = asInteger();
         BigInteger stacks = value.divide(BigInteger.valueOf(64));
@@ -150,6 +209,7 @@ public class RationalNumber {
         return addDelimitingCommas(stacks.toString()) + "x64 + " + leftover;
     }
 
+    @Override
     public String asFluidString() {
         BigInteger value = asInteger();
         BigInteger stacks = value.divide(BigInteger.valueOf(144));
@@ -158,6 +218,7 @@ public class RationalNumber {
         return addDelimitingCommas(stacks.toString()) + "x144mB + " + leftover + "mB";
     }
 
+    @Override
     public String asTimeString() {
         BigInteger value = asInteger();
 
@@ -197,6 +258,7 @@ public class RationalNumber {
         return result.toString();
     }
 
+    @Override
     public String asTickTimeString() {
         BigInteger value = asInteger();
 
@@ -212,6 +274,11 @@ public class RationalNumber {
             return rest;
         }
         return rest + ", " + ticks + " ticks";
+    }
+
+    @Override
+    public NumberValue displayRound() {
+        return this;
     }
 
     private static BigInteger lcm(BigInteger a, BigInteger b) {

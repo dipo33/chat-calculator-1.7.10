@@ -1,5 +1,6 @@
 package com.dipo33.chatcalc.calc.element;
 
+import com.dipo33.chatcalc.calc.NumberValue;
 import com.dipo33.chatcalc.calc.RationalNumber;
 
 import java.util.Objects;
@@ -21,7 +22,7 @@ public class FormulaOperator implements IFormulaElement {
         return type;
     }
 
-    public RationalNumber evaluate(RationalNumber a, RationalNumber b) {
+    public NumberValue evaluate(NumberValue a, NumberValue b) {
         return switch (getValue()) {
             case ADDITION -> a.add(b);
             case SUBTRACTION -> a.subtract(b);

@@ -1,5 +1,6 @@
 package com.dipo33.chatcalc.command;
 
+import com.dipo33.chatcalc.calc.NumberValue;
 import com.dipo33.chatcalc.calc.Parser;
 import com.dipo33.chatcalc.calc.RationalNumber;
 import com.dipo33.chatcalc.calc.ShuntingYard;
@@ -32,11 +33,11 @@ public class CalcCommand extends CommandBase {
             sender.addChatMessage(new ChatComponentText("§b§lFormula: §f" + formula));
 
             List<IFormulaElement> elements = Parser.parse(formula);
-            RationalNumber result = ShuntingYard.evaluatePrefix(ShuntingYard.shuntingYard(elements));
+            NumberValue result = ShuntingYard.evaluatePrefix(ShuntingYard.shuntingYard(elements)).displayRound();
             if (!result.isInteger()) {
                 sender.addChatMessage(new ChatComponentText("§a§lFraction: §f" + result.asFractionString()));
             }
-            sender.addChatMessage(new ChatComponentText("§a§lDecimal: §f" + result.asDecimalString(50)));
+            sender.addChatMessage(new ChatComponentText("§a§lDecimal: §f" + result.asDecimalString(44)));
 
             if (result.isInteger() && result.asInteger().compareTo(BigInteger.ZERO) > 0) {
                 sender.addChatMessage(new ChatComponentText("§a§lStacks: §f" + result.asStackString()));
