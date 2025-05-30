@@ -17,7 +17,7 @@ import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
 @Mod(modid = Tags.MODID, version = Tags.VERSION, name = Tags.MODNAME, acceptableRemoteVersions = "*", acceptedMinecraftVersions = "[1.7.10]")
-public class MyMod {
+public class ChatCalcMod {
 
     private static final Logger LOG = LogManager.getLogger(Tags.MODID);
 
