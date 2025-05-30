@@ -64,14 +64,12 @@ Use the command `/calc <expression>` in chat to evaluate a mathematical formula.
 ### Output
 
 ```
----------------------------------------------
 Formula: 5+4*(3-1)
-Fraction: 13/1
 Decimal: 13
 Stacks: 0x64 + 13
 Fluid: 0x144mB + 13mB
 Time: 13 seconds
-Tick Time: 0 ticks
+Tick Time: 13 ticks
 ```
 
 ---
