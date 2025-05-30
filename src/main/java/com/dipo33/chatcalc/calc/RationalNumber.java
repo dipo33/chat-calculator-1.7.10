@@ -1,4 +1,4 @@
-package io.github.dipo33.chatcalc.calc;
+package com.dipo33.chatcalc.calc;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

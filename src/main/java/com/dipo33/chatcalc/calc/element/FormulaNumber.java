@@ -1,6 +1,6 @@
-package io.github.dipo33.chatcalc.calc.element;
+package com.dipo33.chatcalc.calc.element;
 
-import io.github.dipo33.chatcalc.calc.RationalNumber;
+import com.dipo33.chatcalc.calc.RationalNumber;
 
 public class FormulaNumber implements IFormulaElement {
 

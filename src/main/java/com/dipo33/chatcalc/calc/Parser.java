@@ -1,9 +1,9 @@
-package io.github.dipo33.chatcalc.calc;
+package com.dipo33.chatcalc.calc;
 
-import io.github.dipo33.chatcalc.calc.element.FormulaBracket;
-import io.github.dipo33.chatcalc.calc.element.FormulaNumber;
-import io.github.dipo33.chatcalc.calc.element.FormulaOperator;
-import io.github.dipo33.chatcalc.calc.element.IFormulaElement;
+import com.dipo33.chatcalc.calc.element.FormulaBracket;
+import com.dipo33.chatcalc.calc.element.FormulaNumber;
+import com.dipo33.chatcalc.calc.element.FormulaOperator;
+import com.dipo33.chatcalc.calc.element.IFormulaElement;
 
 import java.util.ArrayList;
 import java.util.List;

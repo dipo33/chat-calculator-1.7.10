@@ -1,9 +1,9 @@
-package io.github.dipo33.chatcalc.command;
+package com.dipo33.chatcalc.command;
 
-import io.github.dipo33.chatcalc.calc.Parser;
-import io.github.dipo33.chatcalc.calc.RationalNumber;
-import io.github.dipo33.chatcalc.calc.ShuntingYard;
-import io.github.dipo33.chatcalc.calc.element.IFormulaElement;
+import com.dipo33.chatcalc.calc.Parser;
+import com.dipo33.chatcalc.calc.RationalNumber;
+import com.dipo33.chatcalc.calc.ShuntingYard;
+import com.dipo33.chatcalc.calc.element.IFormulaElement;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;

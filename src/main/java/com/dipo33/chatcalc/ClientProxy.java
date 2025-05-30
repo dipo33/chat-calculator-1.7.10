@@ -1,4 +1,4 @@
-package io.github.dipo33.chatcalc;
+package com.dipo33.chatcalc;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -9,31 +9,42 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
-public class CommonProxy {
+public class ClientProxy extends CommonProxy {
 
     // preInit "Run before anything else. Read your config, create blocks, items,
     // etc, and register them with the GameRegistry."
     public void preInit(FMLPreInitializationEvent event) {
-        Config.syncronizeConfiguration(event.getSuggestedConfigurationFile());
-
-        MyMod.info(Config.greeting);
-        MyMod.info("I am " + Tags.MODNAME + " at version " + Tags.VERSION + " and group name " + Tags.GROUPNAME);
+        super.preInit(event);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes."
-    public void init(FMLInitializationEvent event) {}
+    public void init(FMLInitializationEvent event) {
+        super.init(event);
+    }
 
     // postInit "Handle interaction with other mods, complete your setup based on this."
-    public void postInit(FMLPostInitializationEvent event) {}
+    public void postInit(FMLPostInitializationEvent event) {
+        super.postInit(event);
+    }
 
-    public void serverAboutToStart(FMLServerAboutToStartEvent event) {}
+    public void serverAboutToStart(FMLServerAboutToStartEvent event) {
+        super.serverAboutToStart(event);
+    }
 
     // register server commands in this event handler
-    public void serverStarting(FMLServerStartingEvent event) {}
+    public void serverStarting(FMLServerStartingEvent event) {
+        super.serverStarting(event);
+    }
 
-    public void serverStarted(FMLServerStartedEvent event) {}
+    public void serverStarted(FMLServerStartedEvent event) {
+        super.serverStarted(event);
+    }
 
-    public void serverStopping(FMLServerStoppingEvent event) {}
+    public void serverStopping(FMLServerStoppingEvent event) {
+        super.serverStopping(event);
+    }
 
-    public void serverStopped(FMLServerStoppedEvent event) {}
+    public void serverStopped(FMLServerStoppedEvent event) {
+        super.serverStopped(event);
+    }
 }

@@ -1,4 +1,4 @@
-package io.github.dipo33.chatcalc.calc.element;
+package com.dipo33.chatcalc.calc.element;
 
 public interface IFormulaElement {
 

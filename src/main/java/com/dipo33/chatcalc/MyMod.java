@@ -1,4 +1,4 @@
-package io.github.dipo33.chatcalc;
+package com.dipo33.chatcalc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import io.github.dipo33.chatcalc.command.CalcCommand;
+import com.dipo33.chatcalc.command.CalcCommand;
 
 @Mod(modid = Tags.MODID, version = Tags.VERSION, name = Tags.MODNAME, acceptableRemoteVersions = "*", acceptedMinecraftVersions = "[1.7.10]")
 public class MyMod {

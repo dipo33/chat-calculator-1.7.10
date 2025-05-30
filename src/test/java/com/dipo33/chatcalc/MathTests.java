@@ -1,6 +1,6 @@
-package io.github.dipo33.chatcalc;
+package com.dipo33.chatcalc;
 
-import io.github.dipo33.chatcalc.calc.RationalNumber;
+import com.dipo33.chatcalc.calc.RationalNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

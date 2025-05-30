@@ -1,4 +1,4 @@
-package io.github.dipo33.chatcalc;
+package com.dipo33.chatcalc;
 
 import java.io.File;
 import net.minecraftforge.common.config.Configuration;
