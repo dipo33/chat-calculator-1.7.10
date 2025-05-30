@@ -79,7 +79,7 @@ public class MathTests {
     @Test
     @DisplayName("Creation of Fraction from positive decimal String")
     public void createFractionFromPositiveDecimalString() {
-        RationalNumber number = new RationalNumber("8.25");
+        RationalNumber number = RationalNumber.fromString("8.25");
         assertEquals(BigInteger.valueOf(33), number.getNumerator());
         assertEquals(BigInteger.valueOf(4), number.getDenominator());
     }
@@ -87,7 +87,7 @@ public class MathTests {
     @Test
     @DisplayName("Creation of Fraction from positive decimal String 2")
     public void createFractionFromPositiveDecimalString2() {
-        RationalNumber number = new RationalNumber("17.138");
+        RationalNumber number = RationalNumber.fromString("17.138");
         assertEquals(BigInteger.valueOf(8569), number.getNumerator());
         assertEquals(BigInteger.valueOf(500), number.getDenominator());
     }
@@ -95,7 +95,7 @@ public class MathTests {
     @Test
     @DisplayName("Creation of Fraction from negative decimal String")
     public void createFractionFromNegativeDecimalString() {
-        RationalNumber number = new RationalNumber("-3.33");
+        RationalNumber number = RationalNumber.fromString("-3.33");
         assertEquals(BigInteger.valueOf(-333), number.getNumerator());
         assertEquals(BigInteger.valueOf(100), number.getDenominator());
     }

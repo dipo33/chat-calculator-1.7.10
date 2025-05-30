@@ -1,5 +1,7 @@
 package com.dipo33.chatcalc.calc.element;
 
+import java.util.Objects;
+
 public class FormulaBracket implements IFormulaElement {
 
     private final Type type;
@@ -11,5 +13,21 @@ public class FormulaBracket implements IFormulaElement {
     @Override
     public Type getType() {
         return type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof final FormulaBracket that)) {
+            return false;
+        }
+        return this.type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type);
     }
 }

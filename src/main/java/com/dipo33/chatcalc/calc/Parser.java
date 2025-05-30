@@ -28,7 +28,7 @@ public class Parser {
                 }
 
                 String number = formulaString.substring(begin, i + 1);
-                elements.add(new FormulaNumber(new RationalNumber(number)));
+                elements.add(new FormulaNumber(RationalNumber.fromString(number)));
             } else {
                 switch (c) {
                     case '+':

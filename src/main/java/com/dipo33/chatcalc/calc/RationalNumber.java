@@ -10,10 +10,6 @@ public class RationalNumber {
     private final BigInteger numerator;
     private final BigInteger denominator;
 
-    public RationalNumber(String number) {
-        this(parseNumerator(number), parseDenominator(number));
-    }
-
     public RationalNumber(int number) {
         this.numerator = BigInteger.valueOf(number);
         this.denominator = BigInteger.ONE;
@@ -30,6 +26,13 @@ public class RationalNumber {
 
     public RationalNumber(int numerator, int denominator) {
         this(BigInteger.valueOf(numerator), BigInteger.valueOf(denominator));
+    }
+
+    public static RationalNumber fromString(String number) {
+        if (!validate(number)) {
+            throw new NumberFormatException("Invalid number format");
+        }
+        return new RationalNumber(parseNumerator(number), parseDenominator(number));
     }
 
     public RationalNumber add(RationalNumber other) {
@@ -234,5 +237,10 @@ public class RationalNumber {
 
         int decimalLength = num.length() - num.indexOf('.') - 1;
         return BigInteger.TEN.pow(decimalLength);
+    }
+
+
+    private static boolean validate(final String number) {
+        return number.matches("^\\d+(\\.\\d+)?$");
     }
 }
