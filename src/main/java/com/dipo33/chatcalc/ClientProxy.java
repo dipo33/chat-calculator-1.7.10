@@ -12,12 +12,12 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 public class ClientProxy extends CommonProxy {
 
     // preInit "Run before anything else. Read your config, create blocks, items,
-    // etc, and register them with the GameRegistry."
+    // etc., and register them with the GameRegistry."
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
     }
 
-    // load "Do your mod setup. Build whatever data structures you care about. Register recipes."
+    // init "Do your mod setup. Build whatever data structures you care about. Register recipes."
     public void init(FMLInitializationEvent event) {
         super.init(event);
     }
@@ -31,7 +31,7 @@ public class ClientProxy extends CommonProxy {
         super.serverAboutToStart(event);
     }
 
-    // register server commands in this event handler
+    // Register server commands in this event handler
     public void serverStarting(FMLServerStartingEvent event) {
         super.serverStarting(event);
     }

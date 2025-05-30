@@ -42,16 +42,18 @@ public class ShuntingYard {
                     while (!operatorStack.isEmpty() && operatorStack.lastElement().getType() != IFormulaElement.Type.LEFT_BRACKET) {
                         outputQueue.add(operatorStack.pop());
                     }
-                    if (operatorStack.isEmpty())
+                    if (operatorStack.isEmpty()) {
                         throw new RuntimeException("Missing a left bracket");
+                    }
                     operatorStack.pop();
             }
         }
 
         while (!operatorStack.empty()) {
             IFormulaElement element = operatorStack.pop();
-            if (element.getType() == IFormulaElement.Type.LEFT_BRACKET)
+            if (element.getType() == IFormulaElement.Type.LEFT_BRACKET) {
                 throw new RuntimeException("Missing a right bracket");
+            }
             outputQueue.add(element);
         }
 

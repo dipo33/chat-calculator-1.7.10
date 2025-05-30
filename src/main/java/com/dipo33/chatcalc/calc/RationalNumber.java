@@ -21,7 +21,9 @@ public class RationalNumber {
 
     public RationalNumber(BigInteger numerator, BigInteger denominator) {
         BigInteger simplifier = gcd(numerator, denominator);
-        if (denominator.compareTo(BigInteger.ZERO) < 0) simplifier = simplifier.negate();
+        if (denominator.compareTo(BigInteger.ZERO) < 0) {
+            simplifier = simplifier.negate();
+        }
         this.numerator = numerator.divide(simplifier);
         this.denominator = denominator.divide(simplifier);
     }
@@ -57,19 +59,26 @@ public class RationalNumber {
     }
 
     public RationalNumber power(RationalNumber other) {
-        if (!other.isInteger()) throw new ArithmeticException("Exponent can't be a decimal number");
+        if (!other.isInteger()) {
+            throw new ArithmeticException("Exponent can't be a decimal number");
+        }
 
         int pow = other.asInteger().intValueExact();
-        if (pow > 512)
+        if (pow > 512) {
             throw new ArithmeticException("Exponent can't be higher than 512");
+        }
 
         return new RationalNumber(numerator.pow(pow), denominator.pow(pow));
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         RationalNumber that = (RationalNumber) o;
         return numerator.equals(that.numerator) && denominator.equals(that.denominator);
     }
@@ -109,7 +118,7 @@ public class RationalNumber {
         BigDecimal decimalDenominator = new BigDecimal(denominator.toString());
 
         String res = decimalNumerator.divide(decimalDenominator, maxDecimalPlaces, RoundingMode.DOWN).toPlainString();
-        res = res.contains(".") ? res.replaceAll("0*$","").replaceAll("\\.$","") : res;
+        res = res.contains(".") ? res.replaceAll("0*$", "").replaceAll("\\.$", "") : res;
         if (res.contains(".")) {
             String intPart = res.substring(0, res.indexOf("."));
             res = addDelimitingCommas(intPart) + res.substring(res.indexOf("."));
@@ -162,19 +171,25 @@ public class RationalNumber {
         BigInteger years = value.divide(BigInteger.valueOf(365));
 
         StringBuilder result = new StringBuilder();
-        if (years.compareTo(BigInteger.ZERO) > 0)
+        if (years.compareTo(BigInteger.ZERO) > 0) {
             result.append(years).append(" years, ");
-        if (days.compareTo(BigInteger.ZERO) > 0)
+        }
+        if (days.compareTo(BigInteger.ZERO) > 0) {
             result.append(days).append(" days, ");
-        if (hours.compareTo(BigInteger.ZERO) > 0)
+        }
+        if (hours.compareTo(BigInteger.ZERO) > 0) {
             result.append(hours).append(" hours, ");
-        if (minutes.compareTo(BigInteger.ZERO) > 0)
+        }
+        if (minutes.compareTo(BigInteger.ZERO) > 0) {
             result.append(minutes).append(" minutes, ");
-        if (seconds.compareTo(BigInteger.ZERO) > 0)
+        }
+        if (seconds.compareTo(BigInteger.ZERO) > 0) {
             result.append(seconds).append(" seconds");
+        }
 
-        if (result.charAt(result.length() -1) == ' ')
+        if (result.charAt(result.length() - 1) == ' ') {
             return result.substring(0, result.length() - 2);
+        }
 
         return result.toString();
     }
@@ -185,12 +200,14 @@ public class RationalNumber {
         BigInteger ticks = value.mod(BigInteger.valueOf(20));
         value = value.divide(BigInteger.valueOf(20));
 
-        if (value.equals(BigInteger.ZERO))
+        if (value.equals(BigInteger.ZERO)) {
             return ticks + " ticks";
+        }
 
         String rest = new RationalNumber(value, BigInteger.ONE).asTimeString();
-        if (ticks.equals(BigInteger.ZERO))
+        if (ticks.equals(BigInteger.ZERO)) {
             return rest;
+        }
         return rest + ", " + ticks + " ticks";
     }
 
@@ -211,7 +228,9 @@ public class RationalNumber {
     }
 
     private static BigInteger parseDenominator(String num) {
-        if (!num.contains(".")) return BigInteger.ONE;
+        if (!num.contains(".")) {
+            return BigInteger.ONE;
+        }
 
         int decimalLength = num.length() - num.indexOf('.') - 1;
         return BigInteger.TEN.pow(decimalLength);

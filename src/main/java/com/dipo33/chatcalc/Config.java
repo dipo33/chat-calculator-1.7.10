@@ -16,12 +16,12 @@ public class Config {
 
     public static String greeting = Defaults.greeting;
 
-    public static void syncronizeConfiguration(File configFile) {
+    public static void synchronizeConfiguration(File configFile) {
         Configuration configuration = new Configuration(configFile);
         configuration.load();
 
         Property greetingProperty =
-                configuration.get(Categories.general, "greeting", Defaults.greeting, "How shall I greet?");
+            configuration.get(Categories.general, "greeting", Defaults.greeting, "How shall I greet?");
         greeting = greetingProperty.getString();
 
         if (configuration.hasChanged()) {

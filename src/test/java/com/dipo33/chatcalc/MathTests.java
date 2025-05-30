@@ -1,8 +1,9 @@
 package com.dipo33.chatcalc;
 
-import com.dipo33.chatcalc.calc.RationalNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import com.dipo33.chatcalc.calc.RationalNumber;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

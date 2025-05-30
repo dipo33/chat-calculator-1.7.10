@@ -3,6 +3,8 @@ package com.dipo33.chatcalc;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.dipo33.chatcalc.command.CalcCommand;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -13,25 +15,24 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import com.dipo33.chatcalc.command.CalcCommand;
 
 @Mod(modid = Tags.MODID, version = Tags.VERSION, name = Tags.MODNAME, acceptableRemoteVersions = "*", acceptedMinecraftVersions = "[1.7.10]")
 public class MyMod {
 
-    private static Logger LOG = LogManager.getLogger(Tags.MODID);
+    private static final Logger LOG = LogManager.getLogger(Tags.MODID);
 
     @SidedProxy(clientSide = Tags.GROUPNAME + ".ClientProxy", serverSide = Tags.GROUPNAME + ".CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
     // preInit "Run before anything else. Read your config, create blocks, items,
-    // etc, and register them with the GameRegistry."
+    // etc., and register them with the GameRegistry."
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
     }
 
     @Mod.EventHandler
-    // load "Do your mod setup. Build whatever data structures you care about. Register recipes."
+    // init "Do your mod setup. Build whatever data structures you care about. Register recipes."
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
     }
@@ -48,7 +49,7 @@ public class MyMod {
     }
 
     @Mod.EventHandler
-    // register server commands in this event handler
+    // Register server commands in this event handler
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
         event.registerServerCommand(new CalcCommand());

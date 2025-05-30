@@ -12,9 +12,9 @@ public class Parser {
 
     public static List<IFormulaElement> parse(String formulaString) {
         formulaString = formulaString.replaceAll("\\s+", "");
-        if (formulaString.isEmpty())
+        if (formulaString.isEmpty()) {
             throw new RuntimeException("No formula found");
-
+        }
 
         List<IFormulaElement> elements = new ArrayList<>();
 
@@ -23,7 +23,9 @@ public class Parser {
             char c = formulaString.charAt(i);
             if (isNumber(c)) {
                 int begin = i;
-                while (i + 1 < formulaString.length() && isNumber(formulaString.charAt(i + 1))) ++i;
+                while (i + 1 < formulaString.length() && isNumber(formulaString.charAt(i + 1))) {
+                    ++i;
+                }
 
                 String number = formulaString.substring(begin, i + 1);
                 elements.add(new FormulaNumber(new RationalNumber(number)));
@@ -55,8 +57,9 @@ public class Parser {
                         elements.add(new FormulaBracket(false));
                         break;
                     case 'x':
-                        if (ShuntingYard.lastResult == null)
+                        if (ShuntingYard.lastResult == null) {
                             throw new RuntimeException("You can't use 'x' before you do any computation");
+                        }
                         elements.add(new FormulaNumber(ShuntingYard.lastResult));
                         break;
                     default:

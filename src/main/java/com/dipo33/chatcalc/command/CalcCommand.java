@@ -4,13 +4,13 @@ import com.dipo33.chatcalc.calc.Parser;
 import com.dipo33.chatcalc.calc.RationalNumber;
 import com.dipo33.chatcalc.calc.ShuntingYard;
 import com.dipo33.chatcalc.calc.element.IFormulaElement;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.util.ChatComponentText;
 
 import java.math.BigInteger;
 import java.util.EmptyStackException;
 import java.util.List;
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.util.ChatComponentText;
 
 public class CalcCommand extends CommandBase {
 
@@ -33,8 +33,9 @@ public class CalcCommand extends CommandBase {
 
             List<IFormulaElement> elements = Parser.parse(formula);
             RationalNumber result = ShuntingYard.evaluatePrefix(ShuntingYard.shuntingYard(elements));
-            if (!result.isInteger())
+            if (!result.isInteger()) {
                 sender.addChatMessage(new ChatComponentText("§a§lFraction: §f" + result.asFractionString()));
+            }
             sender.addChatMessage(new ChatComponentText("§a§lDecimal: §f" + result.asDecimalString(50)));
 
             if (result.isInteger() && result.asInteger().compareTo(BigInteger.ZERO) > 0) {

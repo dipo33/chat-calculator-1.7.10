@@ -20,52 +20,30 @@ public class FormulaOperator implements IFormulaElement {
     }
 
     public RationalNumber evaluate(RationalNumber a, RationalNumber b) {
-        switch (getValue()) {
-            case ADDITION:
-                return a.add(b);
-            case SUBTRACTION:
-                return a.subtract(b);
-            case MULTIPLICATION:
-                return a.multiply(b);
-            case DIVISION:
-                return a.divide(b);
-            case POWER:
-                return a.power(b);
-            default:
-                throw new EnumConstantNotPresentException(OperatorType.class, getValue().name());
-        }
+        return switch (getValue()) {
+            case ADDITION -> a.add(b);
+            case SUBTRACTION -> a.subtract(b);
+            case MULTIPLICATION -> a.multiply(b);
+            case DIVISION -> a.divide(b);
+            case POWER -> a.power(b);
+            default -> throw new EnumConstantNotPresentException(OperatorType.class, getValue().name());
+        };
     }
 
     public int getPrecedence() {
-        switch (getValue()) {
-            case ADDITION:
-            case SUBTRACTION:
-                return 6;
-            case MULTIPLICATION:
-            case DIVISION:
-                return 7;
-            case POWER:
-                return 8;
-            case NEGATION:
-                return 10;
-            default:
-                throw new EnumConstantNotPresentException(OperatorType.class, getValue().name());
-        }
+        return switch (getValue()) {
+            case ADDITION, SUBTRACTION -> 6;
+            case MULTIPLICATION, DIVISION -> 7;
+            case POWER -> 8;
+            case NEGATION -> 10;
+        };
     }
 
     public boolean isLeftAssociative() {
-        switch (getValue()) {
-            case ADDITION:
-            case SUBTRACTION:
-            case MULTIPLICATION:
-            case DIVISION:
-            case NEGATION:
-                return true;
-            case POWER:
-                return false;
-            default:
-                throw new EnumConstantNotPresentException(OperatorType.class, getValue().name());
-        }
+        return switch (getValue()) {
+            case ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION, NEGATION -> true;
+            case POWER -> false;
+        };
     }
 
     public enum OperatorType {
