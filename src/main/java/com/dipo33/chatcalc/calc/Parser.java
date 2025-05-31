@@ -1,6 +1,7 @@
 package com.dipo33.chatcalc.calc;
 
 import com.dipo33.chatcalc.calc.element.FormulaBracket;
+import com.dipo33.chatcalc.calc.element.FormulaFunction;
 import com.dipo33.chatcalc.calc.element.FormulaNumber;
 import com.dipo33.chatcalc.calc.element.FormulaOperator;
 import com.dipo33.chatcalc.calc.element.IFormulaElement;
@@ -29,6 +30,14 @@ public class Parser {
 
                 String number = formulaString.substring(begin, i + 1);
                 elements.add(new FormulaNumber(RationalNumber.fromString(number)));
+            } else if (isFunction(c)) {
+                int begin = i;
+                while (i + 1 < formulaString.length() && isFunction(formulaString.charAt(i + 1))) {
+                    ++i;
+                }
+
+                String fun = formulaString.substring(begin, i + 1);
+                elements.add(FormulaFunction.from(fun));
             } else {
                 switch (c) {
                     case '+':
@@ -59,9 +68,9 @@ public class Parser {
                     case ')':
                         elements.add(new FormulaBracket(false));
                         break;
-                    case 'x':
+                    case '$':
                         if (ShuntingYard.lastResult == null) {
-                            throw new RuntimeException("You can't use 'x' before you do any computation");
+                            throw new RuntimeException("You can't use '$' before you do any computation");
                         }
                         elements.add(new FormulaNumber(ShuntingYard.lastResult));
                         break;
@@ -78,5 +87,9 @@ public class Parser {
 
     private static boolean isNumber(char c) {
         return Character.isDigit(c) || c == '.';
+    }
+
+    private static boolean isFunction(char c) {
+        return Character.isAlphabetic(c);
     }
 }

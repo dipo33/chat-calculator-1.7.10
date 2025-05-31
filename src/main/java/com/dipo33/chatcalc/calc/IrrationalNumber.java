@@ -46,6 +46,11 @@ public class IrrationalNumber implements NumberValue {
     }
 
     @Override
+    public NumberValue abs() {
+        return new IrrationalNumber(value.abs());
+    }
+
+    @Override
     public RationalNumber floor() {
         return new RationalNumber(
             value.setScale(0, RoundingMode.FLOOR).toBigInteger(),

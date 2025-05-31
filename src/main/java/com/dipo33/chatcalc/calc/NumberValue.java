@@ -17,6 +17,8 @@ public interface NumberValue {
 
     NumberValue power(NumberValue other);
 
+    NumberValue abs();
+
     RationalNumber floor();
 
     boolean isInteger();

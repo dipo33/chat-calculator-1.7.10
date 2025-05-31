@@ -7,6 +7,7 @@ public interface IFormulaElement {
     enum Type {
         NUMBER,
         OPERATOR,
+        FUNCTION,
         LEFT_BRACKET,
         RIGHT_BRACKET
     }

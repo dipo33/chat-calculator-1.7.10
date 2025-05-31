@@ -134,6 +134,11 @@ public class RationalNumber implements NumberValue {
     }
 
     @Override
+    public NumberValue abs() {
+        return new RationalNumber(numerator.abs(), denominator.abs());
+    }
+
+    @Override
     public RationalNumber floor() {
         return new RationalNumber(
             this.asBigDecimal().setScale(0, RoundingMode.FLOOR).toBigInteger(),

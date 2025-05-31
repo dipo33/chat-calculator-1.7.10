@@ -2,12 +2,11 @@ package com.dipo33.chatcalc.command;
 
 import com.dipo33.chatcalc.calc.NumberValue;
 import com.dipo33.chatcalc.calc.Parser;
-import com.dipo33.chatcalc.calc.RationalNumber;
 import com.dipo33.chatcalc.calc.ShuntingYard;
 import com.dipo33.chatcalc.calc.element.IFormulaElement;
+import com.dipo33.chatcalc.calc.exception.MissingOperandException;
 
 import java.math.BigInteger;
-import java.util.EmptyStackException;
 import java.util.List;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -47,8 +46,8 @@ public class CalcCommand extends CommandBase {
                     sender.addChatMessage(new ChatComponentText("§a§lTick Time: §f" + result.asTickTimeString()));
                 }
             }
-        } catch (EmptyStackException e) {
-            sender.addChatMessage(new ChatComponentText("§c§lError: §fInvalid formula"));
+        } catch (MissingOperandException e) {
+            sender.addChatMessage(new ChatComponentText("§c§lError: §fMissing operand"));
         } catch (Exception e) {
             sender.addChatMessage(new ChatComponentText("§c§lError: §f" + (e.getMessage() == null ? e.getClass().toString() : e.getMessage())));
         }
