@@ -153,7 +153,9 @@ public class MathTests {
     @Test
     @DisplayName("Power to Fraction")
     public void powerToFraction() {
-        assertThrows(RuntimeException.class, () -> new RationalNumber(2, 1).power(new RationalNumber(1, 2)));
+        BigInteger actual = new RationalNumber(4, 1).power(new RationalNumber(1, 2)).asInteger();
+
+        assertEquals(BigInteger.valueOf(2), actual);
     }
 
     @Test
