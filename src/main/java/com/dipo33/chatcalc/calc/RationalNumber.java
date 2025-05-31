@@ -143,11 +143,59 @@ public class RationalNumber implements NumberValue {
     }
 
     @Override
+    public NumberValue signum() {
+        var comparison = this.asBigDecimal().compareTo(BigDecimal.ZERO);
+        return new RationalNumber(BigInteger.valueOf(comparison), BigInteger.ONE);
+    }
+
+    @Override
+    public NumberValue sqrt() {
+        return power(new RationalNumber(1, 2));
+    }
+
+    @Override
     public RationalNumber floor() {
         return new RationalNumber(
             this.asBigDecimal().setScale(0, RoundingMode.FLOOR).toBigInteger(),
             BigInteger.ONE
         );
+    }
+
+    @Override
+    public NumberValue ceil() {
+        return new RationalNumber(
+            this.asBigDecimal().setScale(0, RoundingMode.CEILING).toBigInteger(),
+            BigInteger.ONE
+        );
+    }
+
+    @Override
+    public NumberValue round(final NumberValue precisionValue) {
+        if (!precisionValue.isInteger()) {
+            throw new ArithmeticException("Rounding with non-integer precision is not supported");
+        }
+
+        var precision = precisionValue.asInteger().intValueExact();
+        var result = this.asBigDecimal().setScale(precision, RoundingMode.HALF_UP);
+        return new RationalNumber(
+            result.movePointRight(precision).toBigInteger(),
+            BigInteger.valueOf(10).pow(precision)
+        );
+    }
+
+    @Override
+    public NumberValue fact() {
+        if (!isInteger()) {
+            throw new ArithmeticException("Factorial can only be calculated for integers");
+        }
+
+        var n = this.asInteger().intValueExact();
+        BigInteger result = BigInteger.ONE;
+        for (int i = 2; i <= n; i++) {
+            result = result.multiply(BigInteger.valueOf(i));
+        }
+
+        return new RationalNumber(result, BigInteger.ONE);
     }
 
     @Override

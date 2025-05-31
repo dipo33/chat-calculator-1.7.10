@@ -74,6 +74,8 @@ public class Parser {
                         }
                         elements.add(new FormulaNumber(ShuntingYard.lastResult));
                         break;
+                    case ',':
+                        break;
                     default:
                         throw new RuntimeException("Illegal character found in formula: " + c);
                 }

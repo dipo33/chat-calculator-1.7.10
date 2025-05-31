@@ -51,11 +51,50 @@ public class IrrationalNumber implements NumberValue {
     }
 
     @Override
+    public NumberValue signum() {
+        var comparison = value.compareTo(BigDecimal.ZERO);
+        return new RationalNumber(BigInteger.valueOf(comparison), BigInteger.ONE);
+    }
+
+    @Override
+    public NumberValue sqrt() {
+        return power(new RationalNumber(1, 2));
+    }
+
+    @Override
     public RationalNumber floor() {
         return new RationalNumber(
             value.setScale(0, RoundingMode.FLOOR).toBigInteger(),
             BigInteger.ONE
         );
+    }
+
+    @Override
+    public NumberValue ceil() {
+        return new RationalNumber(
+            value.setScale(0, RoundingMode.CEILING).toBigInteger(),
+            BigInteger.ONE
+        );
+    }
+
+    @Override
+    public NumberValue round(final NumberValue precision) {
+        if (!precision.isInteger()) {
+            throw new ArithmeticException("Rounding with non-integer precision is not supported");
+        }
+        return new RationalNumber(
+            value.setScale(precision.asInteger().intValueExact(), RoundingMode.HALF_UP).toBigInteger(),
+            BigInteger.ONE
+        );
+    }
+
+    @Override
+    public NumberValue fact() {
+        if (!isInteger()) {
+            throw new ArithmeticException("Factorial can only be calculated for integers");
+        }
+
+        return asRational().fact();
     }
 
     @Override

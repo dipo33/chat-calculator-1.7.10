@@ -19,7 +19,17 @@ public interface NumberValue {
 
     NumberValue abs();
 
+    NumberValue signum();
+
+    NumberValue sqrt();
+
     RationalNumber floor();
+
+    NumberValue ceil();
+
+    NumberValue round(NumberValue precision);
+
+    NumberValue fact();
 
     boolean isInteger();
 
