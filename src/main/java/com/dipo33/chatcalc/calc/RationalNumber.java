@@ -117,6 +117,10 @@ public class RationalNumber implements NumberValue {
         }
 
         int pow = other.asInteger().intValueExact();
+
+        if (pow < 0) {
+            return new RationalNumber(denominator, numerator).power(other.multiply(new RationalNumber(-1, 1)));
+        }
         if (pow > 512) {
             throw new ArithmeticException("Exponent can't be higher than 512");
         }
