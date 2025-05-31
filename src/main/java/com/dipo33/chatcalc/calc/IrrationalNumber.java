@@ -35,8 +35,22 @@ public class IrrationalNumber implements NumberValue {
     }
 
     @Override
+    public NumberValue modulo(final NumberValue other) {
+        var repeats = this.divide(other).floor();
+        return this.subtract(repeats.multiply(other));
+    }
+
+    @Override
     public NumberValue power(final NumberValue other) {
         return new IrrationalNumber(BigDecimalMath.pow(value, other.asBigDecimal(), new MathContext(100, RoundingMode.HALF_UP)));
+    }
+
+    @Override
+    public RationalNumber floor() {
+        return new RationalNumber(
+            value.setScale(0, RoundingMode.FLOOR).toBigInteger(),
+            BigInteger.ONE
+        );
     }
 
     @Override

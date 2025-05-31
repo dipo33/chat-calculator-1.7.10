@@ -97,6 +97,20 @@ public class RationalNumber implements NumberValue {
         return this.asIrrational().divide(other);
     }
 
+    public RationalNumber modulo(RationalNumber other) {
+        var repeats = this.divide(other).floor();
+        return this.subtract(repeats.multiply(other));
+    }
+
+    @Override
+    public NumberValue modulo(final NumberValue other) {
+        if (other instanceof final RationalNumber that) {
+            return this.modulo(that);
+        }
+
+        return this.asIrrational().modulo(other);
+    }
+
     public NumberValue power(RationalNumber other) {
         if (!other.isInteger()) {
             return asIrrational().power(other);
@@ -117,6 +131,14 @@ public class RationalNumber implements NumberValue {
         }
 
         return this.asIrrational().power(other);
+    }
+
+    @Override
+    public RationalNumber floor() {
+        return new RationalNumber(
+            this.asBigDecimal().setScale(0, RoundingMode.FLOOR).toBigInteger(),
+            BigInteger.ONE
+        );
     }
 
     @Override
@@ -305,7 +327,6 @@ public class RationalNumber implements NumberValue {
         int decimalLength = num.length() - num.indexOf('.') - 1;
         return BigInteger.TEN.pow(decimalLength);
     }
-
 
     private static boolean validate(final String number) {
         return number.matches("^\\d+(\\.\\d+)?$");

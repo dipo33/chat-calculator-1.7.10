@@ -1,7 +1,6 @@
 package com.dipo33.chatcalc.calc.element;
 
 import com.dipo33.chatcalc.calc.NumberValue;
-import com.dipo33.chatcalc.calc.RationalNumber;
 
 import java.util.Objects;
 
@@ -28,15 +27,16 @@ public class FormulaOperator implements IFormulaElement {
             case SUBTRACTION -> a.subtract(b);
             case MULTIPLICATION -> a.multiply(b);
             case DIVISION -> a.divide(b);
+            case MODULO -> a.modulo(b);
             case POWER -> a.power(b);
-            default -> throw new EnumConstantNotPresentException(OperatorType.class, getValue().name());
+            case NEGATION -> throw new IllegalStateException("Negation should be handled by the parser");
         };
     }
 
     public int getPrecedence() {
         return switch (getValue()) {
             case ADDITION, SUBTRACTION -> 6;
-            case MULTIPLICATION, DIVISION -> 7;
+            case MULTIPLICATION, DIVISION, MODULO -> 7;
             case POWER -> 8;
             case NEGATION -> 10;
         };
@@ -44,7 +44,7 @@ public class FormulaOperator implements IFormulaElement {
 
     public boolean isLeftAssociative() {
         return switch (getValue()) {
-            case ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION, NEGATION -> true;
+            case ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION, MODULO, NEGATION -> true;
             case POWER -> false;
         };
     }
@@ -71,6 +71,7 @@ public class FormulaOperator implements IFormulaElement {
         MULTIPLICATION,
         DIVISION,
         POWER,
+        MODULO,
         NEGATION
     }
 }

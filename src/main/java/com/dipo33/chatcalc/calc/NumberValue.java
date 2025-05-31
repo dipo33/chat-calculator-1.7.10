@@ -13,7 +13,11 @@ public interface NumberValue {
 
     NumberValue divide(NumberValue other);
 
+    NumberValue modulo(NumberValue other);
+
     NumberValue power(NumberValue other);
+
+    RationalNumber floor();
 
     boolean isInteger();
 

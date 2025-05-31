@@ -47,6 +47,9 @@ public class Parser {
                     case '/':
                         elements.add(new FormulaOperator(FormulaOperator.OperatorType.DIVISION));
                         break;
+                    case '%':
+                        elements.add(new FormulaOperator(FormulaOperator.OperatorType.MODULO));
+                        break;
                     case '^':
                         elements.add(new FormulaOperator(FormulaOperator.OperatorType.POWER));
                         break;
