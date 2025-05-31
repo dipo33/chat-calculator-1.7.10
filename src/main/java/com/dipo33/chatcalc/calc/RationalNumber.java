@@ -329,6 +329,6 @@ public class RationalNumber implements NumberValue {
     }
 
     private static boolean validate(final String number) {
-        return number.matches("^\\d+(\\.\\d+)?$");
+        return number.matches("^(-)?\\d+(\\.\\d+)?$");
     }
 }
